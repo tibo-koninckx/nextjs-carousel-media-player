@@ -1,4 +1,5 @@
 import ReactPlayer from "react-player";
+import {useState} from "react";
 
 interface CarrouselProps {
     onNext: () => void;
@@ -7,7 +8,9 @@ interface CarrouselProps {
 
 export function MediaPlayer(props: CarrouselProps) {
     const {videoURL, onNext} = props;
+    const [playing, setPlaying] = useState(false);
+
     return<>
-        <ReactPlayer/>
+        <ReactPlayer url={videoURL} />
     </>
 }

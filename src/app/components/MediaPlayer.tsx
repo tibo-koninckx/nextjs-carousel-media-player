@@ -1,6 +1,12 @@
 import ReactPlayer from "react-player";
 
-export function MediaPlayer() {
+interface CarrouselProps {
+    onNext: () => void;
+    videoURL: string;
+}
+
+export function MediaPlayer(props: CarrouselProps) {
+    const {videoURL, onNext} = props;
     return<>
         <ReactPlayer/>
     </>

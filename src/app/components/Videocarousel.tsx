@@ -1,7 +1,8 @@
 import {useCallback, useRef} from "react";
 import {CarouselRef} from "antd/es/carousel";
+import {Carousel} from 'antd';
 
-export function Carousel() {
+export function Videocarousel() {
     const carouselRef = useRef<CarouselRef | null>(null);
     const timeoutDuration = useRef<NodeJS.Timeout | null>(null);
 
@@ -9,5 +10,9 @@ export function Carousel() {
         if(timeoutDuration.current) clearTimeout(timeoutDuration.current);
         carouselRef?.current?.next();
     }, []);
+
+    return<>
+        <Carousel></Carousel>
+    </>
 
 }

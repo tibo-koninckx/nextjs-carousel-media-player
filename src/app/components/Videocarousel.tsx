@@ -1,3 +1,4 @@
+'use client'
 import {useCallback, useRef} from "react";
 import {CarouselRef} from "antd/es/carousel";
 import {Carousel} from 'antd';

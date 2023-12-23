@@ -10,7 +10,14 @@ export function MediaPlayer(props: CarrouselProps) {
     const {videoURL, onNext} = props;
     const [playing, setPlaying] = useState(false);
 
-    return<>
-        <ReactPlayer url={videoURL} />
+    const videoEnd = () => {
+        setPlaying(false);
+        onNext();
+    };
+
+    return <>
+        <ReactPlayer url={videoURL} playing={playing} muted={true} height={'100vh'} width={'100vw'}
+                     onReady={() => setPlaying(true)}
+                     stopOnUnmount={true} onEnded={videoEnd}/>
     </>
 }

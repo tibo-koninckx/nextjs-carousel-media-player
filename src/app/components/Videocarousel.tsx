@@ -12,8 +12,9 @@ export function Videocarousel() {
         carouselRef?.current?.next();
     }, []);
 
-    return<>
-        <Carousel></Carousel>
+        return<>
+        <Carousel style={{height: "100vh", overflow: "hidden"}}>
+        </Carousel>
     </>
 
 }

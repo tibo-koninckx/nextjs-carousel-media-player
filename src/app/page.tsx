@@ -1,10 +1,10 @@
-import {Carousel} from "@/app/components/Carousel";
+import {Videocarousel} from "@/app/components/Videocarousel";
 
 export default function Home() {
   return <>
     <div>
       <main>
-        <Carousel/>
+        <Videocarousel/>
       </main>
     </div>
   </>

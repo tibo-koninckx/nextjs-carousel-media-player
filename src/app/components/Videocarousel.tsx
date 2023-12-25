@@ -24,7 +24,6 @@ export function Videocarousel() {
     }, []);
 
     const handleVideoReady = useCallback(() => {
-        // Callback triggered when the video is ready to play
         setShouldStartVideo(true);
     }, []);
 

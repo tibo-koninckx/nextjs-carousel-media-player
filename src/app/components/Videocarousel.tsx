@@ -13,12 +13,9 @@ export function Videocarousel() {
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const [shouldStartVideo, setShouldStartVideo] = useState(false);
 
-    const startVideo = useCallback(() => {
-        setShouldStartVideo(true);
-    }, []);
 
     const nextItem = useCallback(() => {
-        setShouldStartVideo(false);
+        setShouldStartVideo(true);
         setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
         carouselRef?.current?.next();
     }, []);

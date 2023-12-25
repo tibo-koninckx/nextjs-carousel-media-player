@@ -1,13 +1,15 @@
 import ReactPlayer from "react-player";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
-interface CarrouselProps {
+interface MediaPlayerProps {
     onNext: () => void;
+    onVideoReady: () => void;
     videoURL: string;
+    shouldStart: boolean;
 }
 
-export function MediaPlayer(props: CarrouselProps) {
-    const {videoURL, onNext} = props;
+export function MediaPlayer(props: MediaPlayerProps) {
+    const { videoURL, onNext, onVideoReady, shouldStart } = props;
     const [playing, setPlaying] = useState(false);
 
     const videoEnd = () => {
@@ -15,9 +17,20 @@ export function MediaPlayer(props: CarrouselProps) {
         onNext();
     };
 
-    return <>
-        <ReactPlayer url={videoURL} playing={playing} muted={true} height={'100vh'} width={'100vw'}
-                     onReady={() => setPlaying(true)}
-                     stopOnUnmount={true} onEnded={videoEnd}/>
-    </>
+    useEffect(() => {
+        if (shouldStart) {
+            setPlaying(true);
+        }
+    }, [shouldStart]);
+
+    return (
+        <ReactPlayer
+            url={videoURL}
+            playing={playing}
+            muted={true}
+            height={'100vh'}
+            width={'100vw'}
+            onEnded={videoEnd}
+        />
+    );
 }

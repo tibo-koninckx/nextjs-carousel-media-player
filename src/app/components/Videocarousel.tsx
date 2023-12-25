@@ -1,7 +1,11 @@
 'use client'
-import {useCallback, useRef} from "react";
+import {useCallback, useMemo, useRef} from "react";
 import {CarouselRef} from "antd/es/carousel";
 import {Carousel} from 'antd';
+
+interface CarouselItem {
+    content: React.ReactNode
+}
 
 export function Videocarousel() {
     const carouselRef = useRef<CarouselRef | null>(null);

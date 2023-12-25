@@ -1,5 +1,5 @@
 'use client'
-import { useCallback, useMemo, useRef, useState, useEffect } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { CarouselRef } from "antd/es/carousel";
 import { Carousel } from 'antd';
 import { MediaPlayer } from "@/app/components/MediaPlayer";

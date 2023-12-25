@@ -18,8 +18,8 @@ export function Videocarousel() {
     }, []);
 
     const nextItem = useCallback(() => {
-        setShouldStartVideo(false); // Reset the flag when moving to the next item
-        setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length); // Move to the next video
+        setShouldStartVideo(false);
+        setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
         carouselRef?.current?.next();
     }, []);
 

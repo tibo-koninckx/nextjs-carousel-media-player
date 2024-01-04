@@ -1,5 +1,5 @@
 'use client'
-import { useCallback, useMemo, useRef, useState } from "react";
+import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import { CarouselRef } from "antd/es/carousel";
 import { Carousel } from 'antd';
 import { MediaPlayer } from "@/app/components/MediaPlayer";
@@ -12,28 +12,40 @@ export function Videocarousel() {
     const carouselRef = useRef<CarouselRef | null>(null);
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const [shouldStartVideo, setShouldStartVideo] = useState(false);
+    const [nextVideoIndex, setNextVideoIndex] = useState(0);
 
+    useEffect(() => {
+        if (shouldStartVideo) {
+            carouselRef?.current?.next();
+            setCurrentVideoIndex(nextVideoIndex);
+            setShouldStartVideo(false);
+            if(nextVideoIndex === videos.length) {
+                setNextVideoIndex(0);
+            }
+        }
+    }, [shouldStartVideo, nextVideoIndex]);
 
     const nextItem = useCallback(() => {
+        setNextVideoIndex((currentIndex) => (currentIndex + 1) % videos.length);
         setShouldStartVideo(true);
-        setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
-        carouselRef?.current?.next();
     }, []);
+
+
 
     const handleVideoReady = useCallback(() => {
         setShouldStartVideo(true);
     }, []);
 
     const videos = [
-        { id: 1, url: 'https://drive.google.com/file/d/1trIj3AJBv28ZEmvkBNbrWbW16J5fy5Zi/view?usp=sharing' },
-        { id: 2, url: 'https://drive.google.com/file/d/1fmd54F0dFEdf97Kx6YCWCSqHiENYKpW5/view?usp=sharing' },
-        { id: 3, url: 'https://drive.google.com/file/d/1asHdejSg2uCnKvgqcOfc3Httzl51lT0G/view?usp=sharing' }
+        { id: 1, url: 'https://www.youtube.com/watch?v=zU9y354XAgM' },
+        { id: 2, url: 'https://youtu.be/xuP4g7IDgDM' },
+        { id: 3, url: 'https://youtu.be/J1qsrBl_CR0' }
     ];
 
     const videoItem: CarouselItem[] = useMemo(() => {
         return [
             ...videos.map((media, index) => {
-                return { content: <MediaPlayer key={shouldStartVideo ? 'playing' : 'paused'} videoURL={media.url} onVideoReady={handleVideoReady} shouldStart={currentVideoIndex === index} onNext={nextItem} /> };
+                return { content: <MediaPlayer key={shouldStartVideo ? 'playing' : 'paused'} videoURL={media.url} onVideoReady={handleVideoReady} shouldStart={currentVideoIndex ===index} onNext={nextItem} /> };
             }),
         ];
     }, [videos, handleVideoReady, currentVideoIndex, shouldStartVideo]);
